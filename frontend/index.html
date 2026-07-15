@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Partnership AI Agent</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar glass-panel">
+        <div class="brand-block">
+          <div class="brand-mark"></div>
+          <div>
+            <h2>Partnership AI Agent</h2>
+            <p>SDG 17 • Impact OS</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a class="active" href="#dashboard"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+          <a href="#chat"><i class="fa-solid fa-message"></i><span>AI Chat</span></a>
+          <a href="#planner"><i class="fa-solid fa-calendar-check"></i><span>Event Planner</span></a>
+          <a href="#partners"><i class="fa-solid fa-handshake"></i><span>Partner Finder</span></a>
+          <a href="#email"><i class="fa-solid fa-envelope"></i><span>Email Generator</span></a>
+          <a href="#reports"><i class="fa-solid fa-file-lines"></i><span>Report Generator</span></a>
+          <a href="#insights"><i class="fa-solid fa-chart-line"></i><span>SDG Insights</span></a>
+          <a href="#tasks"><i class="fa-solid fa-list-check"></i><span>Task Manager</span></a>
+          <a href="#profile"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+        </nav>
+
+        <div class="sidebar-cards">
+          <div class="mini-card accent-card">
+            <p>Green Impact Score</p>
+            <strong>96%</strong>
+          </div>
+          <div class="mini-card">
+            <p>SDG 17 Information</p>
+            <span>Partner for positive change</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel" id="dashboard">
+        <header class="topbar glass-panel">
+          <div>
+            <p class="eyebrow">Good evening, Maya</p>
+            <h3>Build meaningful partnerships today</h3>
+          </div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Search initiatives" />
+            </label>
+            <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i></button>
+            <div class="profile-pill">
+              <div class="avatar">M</div>
+              <span>Maya</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="stats-grid">
+          <article class="stat-card glass-panel reveal">
+            <p>Events Created</p>
+            <h3 data-target="48">0</h3>
+          </article>
+          <article class="stat-card glass-panel reveal">
+            <p>Partners Connected</p>
+            <h3 data-target="126">0</h3>
+          </article>
+          <article class="stat-card glass-panel reveal">
+            <p>Reports Generated</p>
+            <h3 data-target="89">0</h3>
+          </article>
+          <article class="stat-card glass-panel reveal">
+            <p>Volunteers</p>
+            <h3 data-target="320">0</h3>
+          </article>
+        </section>
+
+        <section class="hero-grid">
+          <section class="hero-card glass-panel hero-main reveal">
+            <div>
+              <p class="eyebrow">Premium AI Workspace</p>
+              <h1>Your AI Partner for Sustainable Collaboration</h1>
+              <p>
+                Plan projects, generate reports, connect NGOs, automate emails and manage SDG initiatives using AI.
+              </p>
+              <div class="hero-actions">
+                <button class="primary-btn" type="button">Launch AI Chat</button>
+                <button class="secondary-btn" type="button">Explore Features</button>
+              </div>
+            </div>
+            <div class="hero-illustration" aria-hidden="true">
+              <div class="orb orb-one"></div>
+              <div class="orb orb-two"></div>
+              <div class="planet-card">
+                <i class="fa-solid fa-seedling"></i>
+                <span>Impact Engine</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="glass-panel right-rail reveal">
+            <div class="rail-header">
+              <h3>Upcoming Events</h3>
+              <a href="#">View all</a>
+            </div>
+            <div class="rail-list">
+              <div class="rail-item">
+                <strong>Community Clean-Up</strong>
+                <span>Fri • 9:00 AM</span>
+              </div>
+              <div class="rail-item">
+                <strong>Tree Plantation Drive</strong>
+                <span>Sun • 7:30 AM</span>
+              </div>
+              <div class="rail-item">
+                <strong>CSR Roundtable</strong>
+                <span>Tue • 3:00 PM</span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="content-grid">
+          <section id="chat" class="glass-panel chat-panel reveal">
+            <div class="panel-heading">
+              <div>
+                <h3>AI Chat</h3>
+                <p>Ask for campaigns, NGO suggestions, emails, reports, and summaries.</p>
+              </div>
+              <div class="panel-actions">
+                <button id="new-chat-btn" class="ghost-btn" type="button">New Chat</button>
+                <button id="export-txt-btn" class="ghost-btn" type="button">Export TXT</button>
+                <button id="export-pdf-btn" class="ghost-btn" type="button">Export PDF</button>
+                <button id="clear-chat-btn" class="ghost-btn danger" type="button">Clear</button>
+                <span class="status-pill">Live</span>
+              </div>
+            </div>
+
+            <div class="quick-prompts" role="list" aria-label="Quick suggestions">
+              <button data-prompt="Plan a tree plantation drive for a school" type="button">Plan Tree Plantation</button>
+              <button data-prompt="Generate a professional email for an NGO partnership request" type="button">Generate NGO Email</button>
+              <button data-prompt="Suggest NGO partners for a youth impact program" type="button">Suggest NGO Partners</button>
+              <button data-prompt="Generate a project report for a sustainability initiative" type="button">Generate Project Report</button>
+              <button data-prompt="Explain SDG 17 in simple terms" type="button">Explain SDG 17</button>
+              <button data-prompt="Create a cleanliness campaign plan for a local community" type="button">Create Cleanliness Campaign</button>
+            </div>
+
+            <div id="welcome-screen" class="welcome-screen">
+              <div class="welcome-illustration" aria-hidden="true">
+                <div class="welcome-blob"></div>
+                <div class="welcome-core">
+                  <i class="fa-solid fa-robot"></i>
+                </div>
+              </div>
+              <h4>Hello, let’s build impact together.</h4>
+              <p>Start with a prompt and I’ll help you plan projects, outreach, reports, and partnerships for SDG 17.</p>
+            </div>
+
+            <div id="messages" class="messages" aria-live="polite"></div>
+            <form id="chat-form" class="chat-form">
+              <label class="sr-only" for="message-input">Message input</label>
+              <input id="message-input" type="text" placeholder="Ask the agent anything about SDG 17 or sustainability" autocomplete="off" />
+              <button type="submit" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+          </section>
+
+          <aside class="side-stack">
+            <section class="glass-panel info-panel reveal">
+              <div class="panel-heading compact">
+                <h3>Conversation History</h3>
+                <a href="#">Recent</a>
+              </div>
+              <div id="history-list" class="history-list"></div>
+            </section>
+
+            <section class="glass-panel info-panel reveal">
+              <div class="panel-heading compact">
+                <h3>Top NGO Suggestions</h3>
+                <a href="#">See all</a>
+              </div>
+              <div class="info-list">
+                <div class="info-item">
+                  <strong>Green Future Foundation</strong>
+                  <span>Community engagement</span>
+                </div>
+                <div class="info-item">
+                  <strong>Bright Horizons Network</strong>
+                  <span>Youth empowerment</span>
+                </div>
+                <div class="info-item">
+                  <strong>EcoBridge Alliance</strong>
+                  <span>Environmental restoration</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="glass-panel info-panel reveal">
+              <div class="panel-heading compact">
+                <h3>Recent Activity</h3>
+                <a href="#">Today</a>
+              </div>
+              <div class="info-list">
+                <div class="info-item">
+                  <strong>Report shared</strong>
+                  <span>2 mins ago</span>
+                </div>
+                <div class="info-item">
+                  <strong>Partner request accepted</strong>
+                  <span>18 mins ago</span>
+                </div>
+                <div class="info-item">
+                  <strong>Email drafted</strong>
+                  <span>41 mins ago</span>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        <section class="features-grid">
+          <article class="feature-card glass-panel reveal" id="planner">
+            <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <h4>Planner</h4>
+            <p>Shape high-impact events with AI-guided planning.</p>
+          </article>
+          <article class="feature-card glass-panel reveal" id="partners">
+            <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+            <h4>Partner Finder</h4>
+            <p>Discover aligned NGOs and CSR collaborators quickly.</p>
+          </article>
+          <article class="feature-card glass-panel reveal" id="email">
+            <div class="feature-icon"><i class="fa-solid fa-paper-plane"></i></div>
+            <h4>Email Generator</h4>
+            <p>Create polished outreach emails in seconds.</p>
+          </article>
+          <article class="feature-card glass-panel reveal" id="reports">
+            <div class="feature-icon"><i class="fa-solid fa-file-contract"></i></div>
+            <h4>Report Generator</h4>
+            <p>Turn project updates into professional reports.</p>
+          </article>
+          <article class="feature-card glass-panel reveal" id="insights">
+            <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+            <h4>SDG Insights</h4>
+            <p>Understand trends and opportunities around SDG 17.</p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div id="loading" class="loading-overlay hidden" aria-hidden="true">
+      <div class="loader" aria-label="Loading">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div id="modal-root" class="modal-root hidden" aria-hidden="true">
+      <div class="modal-card glass-panel" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <h3 id="modal-title">Action</h3>
+          <button id="modal-close" class="ghost-btn" type="button">Close</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
