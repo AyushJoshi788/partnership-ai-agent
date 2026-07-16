@@ -1,6 +1,7 @@
 const messagesEl = document.getElementById('messages');
 const formEl = document.getElementById('chat-form');
 const inputEl = document.getElementById('message-input');
+const API_BASE = "https://partnership-ai-agent.vercel.app";
 const loadingEl = document.getElementById('loading');
 const toastEl = document.getElementById('toast');
 const promptButtons = document.querySelectorAll('.quick-prompts button');
@@ -198,15 +199,24 @@ function closeModal() {
 async function runFeatureRequest(url, payload, actionElement = null) {
   showLoading(true);
   setProcessingState(actionElement, true);
+
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`${API_BASE}${url}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload)
     });
+
     const data = await response.json();
-    if (!response.ok) throw new Error(data.detail || 'Request failed.');
+
+    if (!response.ok) {
+      throw new Error(data.detail || 'Request failed.');
+    }
+
     return data;
+
   } finally {
     showLoading(false);
     setProcessingState(actionElement, false);
@@ -235,7 +245,7 @@ async function loadSearchInsights() {
           event.preventDefault();
           const query = searchInputEl.value.trim();
           if (!query) return;
-          const response = await fetch('/search', {
+          const response = await fetch(`${API_BASE}/search`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })
@@ -250,7 +260,7 @@ async function loadSearchInsights() {
       });
     }
 
-    const response = await fetch('/insights');
+    const response = await fetch(`${API_BASE}/insights`);
     if (!response.ok) throw new Error('Unable to load insights data');
     const data = await response.json();
 
@@ -263,7 +273,7 @@ async function loadSearchInsights() {
     }
 
     if (searchValue) {
-      const searchResponse = await fetch('/search', {
+      const searchResponse = await fetch(`${API_BASE}/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: searchValue })
@@ -281,7 +291,7 @@ async function loadSearchInsights() {
 
 async function loadTaskAndProfileData() {
   try {
-    const tasksResponse = await fetch('/tasks');
+    const tasksResponse = await fetch(`${API_BASE}/tasks`);
     if (!tasksResponse.ok) throw new Error('Unable to load tasks');
     const tasksData = await tasksResponse.json();
 
@@ -289,7 +299,7 @@ async function loadTaskAndProfileData() {
       activityListEl.innerHTML = tasksData.tasks.map((task) => `<div class="info-item"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.status)}</span></div>`).join('');
     }
 
-    const profileResponse = await fetch('/profile');
+    const profileResponse = await fetch(`${API_BASE}/profile`);
     if (!profileResponse.ok) throw new Error('Unable to load profile');
     const profileData = await profileResponse.json();
 
@@ -394,7 +404,7 @@ function renderConversation() {
 
 async function loadDashboardData() {
   try {
-    const response = await fetch('/dashboard');
+    const response = await fetch(`${API_BASE}/dashboard`);
     if (!response.ok) throw new Error('Unable to load dashboard data');
     const data = await response.json();
 
@@ -467,7 +477,7 @@ function observeReveals() {
 
 async function loadHistory() {
   try {
-    const response = await fetch('/history');
+    const response = await fetch(`${API_BASE}/history`);
     if (!response.ok) throw new Error('Unable to load chat history');
     const data = await response.json();
     const historyItems = data.history || [];
@@ -542,7 +552,7 @@ async function sendMessage(message, mode = 'chat') {
     let data;
 
     if (mode === 'chat') {
-      response = await fetch('/chat', {
+      response = await fetch(`${API_BASE}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
@@ -559,7 +569,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'planner') {
-      response = await fetch('/planner', {
+      response = await fetch(`${API_BASE}/planner`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -576,7 +586,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'email') {
-      response = await fetch('/email', {
+      response = await fetch(`${API_BASE}/email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -593,7 +603,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'report') {
-      response = await fetch('/report', {
+      response = await fetch(`${API_BASE}/report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -610,7 +620,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'partners') {
-      response = await fetch('/partners', {
+      response = await fetch(`${API_BASE}/partners`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
