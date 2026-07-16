@@ -55,8 +55,8 @@ def chat(request: ChatRequest):
     try:
         reply = generate_agent_response(request.message)
 
-        save_chat_message("user", request.message)
-        save_chat_message("assistant", reply)
+        #save_chat_message("user", request.message)
+        #save_chat_message("assistant", reply)
 
         return ChatResponse(
             reply=reply,
