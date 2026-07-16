@@ -46,10 +46,28 @@ def health_check():
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
-    return ChatResponse(
-        reply=f"Hello! Your message was: {request.message}",
-        status="ok"
-    )
+    if not request.message.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Message cannot be empty"
+        )
+
+    try:
+        reply = generate_agent_response(request.message)
+
+        save_chat_message("user", request.message)
+        save_chat_message("assistant", reply)
+
+        return ChatResponse(
+            reply=reply,
+            status="ok"
+        )
+
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=str(exc)
+        )
         
 
 @app.get("/history")
