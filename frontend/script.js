@@ -235,7 +235,7 @@ async function loadSearchInsights() {
           event.preventDefault();
           const query = searchInputEl.value.trim();
           if (!query) return;
-          const response = await fetch('http://127.0.0.1:8000/search', {
+          const response = await fetch('/search', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })
@@ -250,7 +250,7 @@ async function loadSearchInsights() {
       });
     }
 
-    const response = await fetch('http://127.0.0.1:8000/insights');
+    const response = await fetch('/insights');
     if (!response.ok) throw new Error('Unable to load insights data');
     const data = await response.json();
 
@@ -263,7 +263,7 @@ async function loadSearchInsights() {
     }
 
     if (searchValue) {
-      const searchResponse = await fetch('http://127.0.0.1:8000/search', {
+      const searchResponse = await fetch('/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: searchValue })
@@ -281,7 +281,7 @@ async function loadSearchInsights() {
 
 async function loadTaskAndProfileData() {
   try {
-    const tasksResponse = await fetch('http://127.0.0.1:8000/tasks');
+    const tasksResponse = await fetch('/tasks');
     if (!tasksResponse.ok) throw new Error('Unable to load tasks');
     const tasksData = await tasksResponse.json();
 
@@ -289,7 +289,7 @@ async function loadTaskAndProfileData() {
       activityListEl.innerHTML = tasksData.tasks.map((task) => `<div class="info-item"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.status)}</span></div>`).join('');
     }
 
-    const profileResponse = await fetch('http://127.0.0.1:8000/profile');
+    const profileResponse = await fetch('/profile');
     if (!profileResponse.ok) throw new Error('Unable to load profile');
     const profileData = await profileResponse.json();
 
@@ -394,7 +394,7 @@ function renderConversation() {
 
 async function loadDashboardData() {
   try {
-    const response = await fetch('http://127.0.0.1:8000/dashboard');
+    const response = await fetch('/dashboard');
     if (!response.ok) throw new Error('Unable to load dashboard data');
     const data = await response.json();
 
@@ -467,7 +467,7 @@ function observeReveals() {
 
 async function loadHistory() {
   try {
-    const response = await fetch('http://127.0.0.1:8000/history');
+    const response = await fetch('/history');
     if (!response.ok) throw new Error('Unable to load chat history');
     const data = await response.json();
     const historyItems = data.history || [];
@@ -542,7 +542,7 @@ async function sendMessage(message, mode = 'chat') {
     let data;
 
     if (mode === 'chat') {
-      response = await fetch('http://127.0.0.1:8000/chat', {
+      response = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
@@ -559,7 +559,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'planner') {
-      response = await fetch('http://127.0.0.1:8000/planner', {
+      response = await fetch('/planner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -576,7 +576,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'email') {
-      response = await fetch('http://127.0.0.1:8000/email', {
+      response = await fetch('/email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -593,7 +593,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'report') {
-      response = await fetch('http://127.0.0.1:8000/report', {
+      response = await fetch('/report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -610,7 +610,7 @@ async function sendMessage(message, mode = 'chat') {
     }
 
     if (mode === 'partners') {
-      response = await fetch('http://127.0.0.1:8000/partners', {
+      response = await fetch('/partners', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: message })
@@ -776,7 +776,7 @@ plannerCard.addEventListener('click', () => {
     payload.volunteers = Number(payload.volunteers);
     const submitButton = event.currentTarget.querySelector('button[type="submit"]');
     try {
-      const data = await runFeatureRequest('http://127.0.0.1:8000/event-plan', payload, submitButton);
+      const data = await runFeatureRequest('/event-plan', payload, submitButton);
       const plan = data.plan;
       openModal('Event Planner', `
         <div class="result-card">
@@ -820,7 +820,7 @@ partnersCard.addEventListener('click', () => {
     const payload = Object.fromEntries(formData.entries());
     const submitButton = event.currentTarget.querySelector('button[type="submit"]');
     try {
-      const data = await runFeatureRequest('http://127.0.0.1:8000/partner-finder', payload, submitButton);
+      const data = await runFeatureRequest('/partner-finder', payload, submitButton);
       openModal('Partner Finder', `
         <div class="partner-grid">
           ${data.partners.map((partner) => `
@@ -860,7 +860,7 @@ emailCard.addEventListener('click', () => {
     const payload = Object.fromEntries(formData.entries());
     const submitButton = event.currentTarget.querySelector('button[type="submit"]');
     try {
-      const data = await runFeatureRequest('http://127.0.0.1:8000/email-generator', payload, submitButton);
+      const data = await runFeatureRequest('/email-generator', payload, submitButton);
       const email = data.email;
       openModal('Email Generator', `
         <div class="result-card">
@@ -886,7 +886,7 @@ emailCard.addEventListener('click', () => {
 
 reportsCard.addEventListener('click', async () => {
   try {
-    const data = await runFeatureRequest('http://127.0.0.1:8000/report-generator', { topic: 'community sustainability' }, reportsCard);
+    const data = await runFeatureRequest('/report-generator', { topic: 'community sustainability' }, reportsCard);
     const report = data.report;
     openModal('Report Generator', `
       <div class="result-card">
@@ -916,7 +916,7 @@ reportsCard.addEventListener('click', async () => {
 const insightsCard = document.getElementById('insights');
 insightsCard.addEventListener('click', async () => {
   try {
-    const data = await runFeatureRequest('http://127.0.0.1:8000/sdg-insights', { topic: 'SDG 17' }, insightsCard);
+    const data = await runFeatureRequest('/sdg-insights', { topic: 'SDG 17' }, insightsCard);
     openModal('SDG Insights', `
       <div class="result-card">
         <h4>SDG Insights</h4>
