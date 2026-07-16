@@ -254,24 +254,4 @@ def fallback_response(message: str, intent: str) -> str:
 
 
 def generate_agent_response(message: str) -> str:
-    intent = detect_intent(message)
-    api_key = os.getenv("GEMINI_API_KEY", "").strip()
-
-    if api_key and api_key != "your_api_key_here":
-        try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
-            payload = {
-                "contents": [{"parts": [{"text": build_prompt(message)}]}],
-                "generationConfig": {"temperature": 0.7, "topP": 0.9},
-            }
-            response = requests.post(url, json=payload, timeout=30)
-            response.raise_for_status()
-            data = response.json()
-            if data.get("candidates"):
-                text = data["candidates"][0]["content"]["parts"][0].get("text", "")
-                if text.strip():
-                    return text.strip()
-        except Exception:
-            pass
-
-    return fallback_response(message, intent)
+    return f"Hello! Your message was: {message}"
